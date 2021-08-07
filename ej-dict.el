@@ -9,6 +9,8 @@
 
 (defvar ej-dict-global-timer nil)
 
+(defvar current-word-highlight-mode nil)
+
 (defun ej-dict-read (&optional query)
   "Manually input search.
 If exist QUERY, use it."
@@ -24,7 +26,11 @@ If exist QUERY, use it."
            (setq query (buffer-substring (region-beginning) (region-end))))
           (t
            (setq query (current-word))))
-    (grep (concat "grep --color -Ei " "^" query " " ej-dict-data-directory "/" (substring query 0 1) ".txt"))))
+    (setq query (downcase query))
+    (cond ((string-match "[a-z]" (substring query 0 1))
+           (grep (concat "grep --color -Ei " "^" query " " ej-dict-data-directory "/" (substring query 0 1) ".txt")))
+          (t
+           (grep (concat "grep --color -Eir " query " " ej-dict-data-directory "/"))))))
 
 (defun ej-dict-download-file (alphabet)
   "Download ej-dict ALPHABET file."
