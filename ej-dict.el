@@ -5,7 +5,9 @@
   ("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
 
 (defvar ej-dict-data-directory
-  "ej-dict-data")
+  (concat (getenv "HOME") "/.emacs.d/ej-dict-data"))
+
+(defvar ej-dict-global-timer nil)
 
 (defun ej-dict-read (&optional query)
   "Manually input search.
@@ -30,6 +32,27 @@ If exist QUERY, use it."
 
 (defun ej-dict-install-dict ()
   "Install all ej-dict files."
-  (make-directory "ej-dict-data")
+  (interactive)
+  (make-directory ej-dict-data-directory)
   (dolist (alphabet ej-dict-alphabet-list)
     (ej-dict-download-file alphabet)))
+
+(defun ej-dict-cancel-timer ()
+  "Cancel search timer."
+  (when (timerp ej-dict-global-timer)
+    (cancel-timer ej-dict-global-timer)
+    (setq ej-dict-global-timer nil)))
+
+;;;###autoload
+(define-minor-mode ej-dict-mode
+  "ej-dict Minor Mode."
+  :group 'ej-dict
+  (if ej-dict-mode
+      (progn (unless ej-dict-global-timer
+               (setq ej-dict-global-timer
+                     (run-with-idle-timer 0.2
+                                          :repeat 'ej-dict-auto))))
+    (ej-dict-cancel-timer)))
+
+(provide 'ej-dict)
+;;; ej-dict.el ends here
