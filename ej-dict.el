@@ -2,7 +2,7 @@
   "https://raw.githubusercontent.com/kujirahand/EJDict/master/src/")
 
 (defvar ej-dict-alphabet-list
-  ("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
+  (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
 
 (defvar ej-dict-data-directory
   (concat (getenv "HOME") "/.emacs.d/ej-dict-data"))

@@ -1,0 +1,13 @@
+* ej-dict.el
+英語辞書検索を行うパッケージ。
+** 特徴
+- 入れればどこでもすぐ動く
+- 入力不要
+- 高速動作
+** インストール
+#+begin_src emacs-lisp
+  (use-package ej-dict
+    :straight (:host github :repo "kijimaD/ej-dict"))
+
+  (ej-dict-install-dict)
+#+end_src
