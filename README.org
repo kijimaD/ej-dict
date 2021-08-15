@@ -1,9 +1,13 @@
 * ej-dict.el
-英語辞書検索を行うパッケージ。
+~英語→日本語~ 辞書検索を行うパッケージです。
+使用辞書は https://github.com/kujirahand/EJDict です。
+
+[[file:image.gif]]
+
 ** 特徴
-- 入れればどこでもすぐ動く
-- 入力不要
-- 高速動作
+- 辞書の前準備は不要です
+- 検索入力不要です。カーソル上の単語を検索します
+- 辞書データをオフラインにダウンロードするため高速です
 ** インストール
 #+begin_src emacs-lisp
   (use-package ej-dict
@@ -11,3 +15,17 @@
 
   (ej-dict-install-dict)
 #+end_src
+
+straight.el
+https://github.com/raxod502/straight.el#bootstrapping-straightel
+** 開始
+#+begin_src emacs-lisp
+(ej-dict-mode)
+#+end_src
+** Task
+*** TODO 選択がむずかしい
+選択しているとその範囲を検索するが、timerが短すぎて選択しづらい。
+*** TODO 別の辞書データ対応
+*** TODO 語形変化対応
+*** TODO 逆検索
+日本語から英語へ検索。
